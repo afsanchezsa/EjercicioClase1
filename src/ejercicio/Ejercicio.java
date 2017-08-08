@@ -31,28 +31,32 @@ public class Ejercicio {
         numeroHoras = flujoEntrada.nextInt();
         System.out.println("Valor");
         valorHora = flujoEntrada.nextDouble();
-double totalsalario=sueldo(numeroHoras,valorHora);
+        double totalsalario = sueldo(numeroHoras, valorHora);
 
         System.out.println("el valor a pagar a " + nombre + " es " + calcularSalario(numeroHoras, valorHora));
-        System.out.println("Nombre "+nombre+" Salario "+totalsalario);
+        System.out.println("Nombre " + nombre + " Salario " + totalsalario);
     }
-/**
- * funcion que permite calcular salario de un trabajador basado en numero de horas y valor de la hora
- * @param horas_trabajadas_semana numero entero que indica la cantidad de horas
- * 
- * @param valor_hora numero double que indica el valor de la hora
- * @return numero double que indica el valor total a pagar
- */
+
+    /**
+     * funcion que permite calcular salario de un trabajador basado en numero de
+     * horas y valor de la hora
+     *
+     * @param horas_trabajadas_semana numero entero que indica la cantidad de
+     * horas
+     *
+     * @param valor_hora numero double que indica el valor de la hora
+     * @return numero double que indica el valor total a pagar
+     */
     public static double dinero(int horas_trabajadas_semana, double valor_hora) {
         double total = 0;
         int horas_extras = 0;
-        int horas_dobles = 0;
+
         int horas_triples = 0;
         if (horas_trabajadas_semana > 40) {
             horas_extras = horas_trabajadas_semana - 40;
             total = (horas_trabajadas_semana - horas_extras) * valor_hora;
         }
-        if (horas_extras < 8) {
+        if (horas_extras <= 8) {
             total += horas_extras * valor_hora * 2;
         } else {
 
@@ -66,11 +70,14 @@ double totalsalario=sueldo(numeroHoras,valorHora);
     public static double calcularSalario(int horas, double valor) {
         double totalSalario = 0;
         int horas_extras = 0;
-        int horas_dobles = 0;
+
         int horas_triples = 0;
-        if (horas > 40) {
+        if (horas >= 40) {
             horas_extras = horas - 40;
             totalSalario = (horas - horas_extras) * valor;
+        } else {
+            totalSalario = 40 * horas;
+
         }
         if (horas_extras < 8) {
             totalSalario += horas_extras * valor * 2;
@@ -101,12 +108,6 @@ double totalsalario=sueldo(numeroHoras,valorHora);
                 totalsalario += horasextra * (2 * valor);
             }
         }
-    return totalsalario;
+        return totalsalario;
     }
 }
-
-    
-    
-    
-    
-
