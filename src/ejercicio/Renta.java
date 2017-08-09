@@ -21,14 +21,41 @@ public class Renta {
     double Renta,patrimonio;
     int creditos;
         Estudiante []alumnos=new Estudiante[10];
-    int numero_alumno=1;    
+    int numero_alumno=0;    
     System.out.println("Desea Registrar un nuevo estudiante(y/n)");
         Scanner entrada=new Scanner(System.in);
         String agregar=entrada.next();
-        if(agregar.compareToIgnoreCase("y")==0){
+        boolean registrar=agregar.compareToIgnoreCase("y")==0;
+        while(registrar&&numero_alumno<10){
             System.out.println("ingrese por favor la renta ");
-            Renta=next
-            alumnos[numero_alumno]=new Estudiante(numero_alumno,Renta,patrimonio,creditos);
+            Renta=entrada.nextDouble();
+            System.out.println("ingrese el valor del patrimonio");
+            patrimonio=entrada.nextDouble();
+            System.out.println("ingrese el numero de creditos");
+            creditos=entrada.nextInt();
+            alumnos[numero_alumno]=new Estudiante(numero_alumno+1,Renta,patrimonio,creditos);
+            numero_alumno++;
+         System.out.println("Desea Registrar un nuevo estudiante(y/n)");
+        agregar=entrada.next();
+         registrar=agregar.compareToIgnoreCase("y")==0; 
+        }
+        System.out.println("desea generar el reporte?(y/n)");
+        String reporte=entrada.next();
+        if(reporte.compareToIgnoreCase("y")==0){
+        System.out.println("CODIGO   COSTO DE MATRICULA");
+            for(int i=0;i<numero_alumno;i++){
+                System.out.println(alumnos[i].codigo()+"        "+alumnos[i].matricula());
+            
+            
+        }
+            double recaudo=0;
+            for(int i=0;i<numero_alumno;i++){
+                recaudo+=alumnos[i].matricula();
+                
+            
+            
+        }
+            System.out.println("el recaudo total es "+recaudo);
         }
         
 
@@ -36,6 +63,9 @@ public class Renta {
     /**
      * Clase Estudiante para gestionar personal universitario
      */
+
+}
+
  class Estudiante{
 private int Codigo; 
 private double Rentaliquida;
@@ -47,6 +77,7 @@ private int Creditos;
     if(codigo>10){
     System.out.println("se ha llegado al numero maximo de estudiantes (10)");
     }else{
+    Codigo=codigo;
     Rentaliquida=Renta;
     Patrimonio=patrimonio;
     Creditos=creditos;
@@ -91,9 +122,8 @@ private int Creditos;
    return valorCredito[2];
            
     }
-    public void consulta(){
-    
-    }
+   public int codigo(){
+   return Codigo;
+   }
 
             }
-}
