@@ -29,6 +29,8 @@ public class Simulador {
         double depositocorriente;
         double depositocdt;
         boolean permanecer=true;
+        int meses;
+        int comodin=0;
         while(permanecer){
         System.out.println("SELECCIONE UNA OPCION");
         System.out.println("1. crear una cuenta");
@@ -39,6 +41,7 @@ public class Simulador {
         System.out.println("6.cerrar cdt");
         System.out.println("7.cambio de mes");
         System.out.println("8.mostrar extracto");
+        System.out.println("9.resultados de inversion a largo plazo por meses");
         int a = 0;
         Scanner entrada = new Scanner(System.in);
         a = entrada.nextInt();
@@ -146,8 +149,28 @@ public class Simulador {
                         System.out.println("no se encontro la cuenta");
                     }
                 }
+                break;
+               case 9:
+                   System.out.println("inserte el numero de meses");
+                   meses=entrada.nextInt();
+                   
+                   for(int m=0;m<meses;m++){
+                    for (int j = 0; j < i; j++) {
+                    if (usuarios[j].Cedula == cedula) {
+
+                        usuarios[j].micuenta.miahorro.descontar_interes();
+                        usuarios[j].micuenta.micorriente.micdt.aumentar_cdt();
+                        System.out.println("se ha cambiado de mes");
+                        comodin=j;
+                    } else {
+                        System.out.println("no se encontro la cuenta");
+                    }
+                }
+                   }
+                   System.out.println("el rendimmiento de la inversion en cdt en "+meses+" meses es "+usuarios[comodin].micuenta.micorriente.micdt.rendimiento());
         } System.out.println("desea permanecer en el simulador (y/n)");
         permanecer=entrada.next().equalsIgnoreCase("y");
+
 
     }
     }
@@ -199,13 +222,14 @@ class Cuenta {
         }
 
         class CDT {
-
+            double inversioninicial;
             double inversion;
             double interes;
             double Totalcdt = 0;
 
             public CDT(double inversion_, double interes_) {
                 inversion = inversion_;
+                inversioninicial=inversion_;
                 interes = interes_;
             }
 
@@ -218,6 +242,9 @@ class Cuenta {
                 Totalcdt = 0;
 
             }
+            public double rendimiento(){
+        return Totalcdt-inversioninicial;
+        }
         }
     }
 }
